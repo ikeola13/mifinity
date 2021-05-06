@@ -1,0 +1,29 @@
+<!-- Side Navigation -->
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">
+      <a class="point" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="bi bi-list" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" style="color: white;"></i>
+      </a>
+      Angular Task</span>
+  </div>
+</nav>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Pages</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="route-link-container">
+      <a class="route-link" routerLink="/home" data-bs-dismiss="offcanvas" routerLinkActive="is-active"><i
+          class="bi bi-house-fill"></i> Home</a>
+    </div>
+    <div class="route-link-container">
+      <a class="route-link" routerLink="/contacts" data-bs-dismiss="offcanvas" routerLinkActive="is-active"><i
+          class="bi bi-person-lines-fill"></i> Contacts</a>
+    </div>
+  </div>
+</div>
+
+<!-- Routing -->
+<router-outlet></router-outlet>

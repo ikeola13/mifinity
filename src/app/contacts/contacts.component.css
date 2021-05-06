@@ -1,0 +1,51 @@
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .contacts {
+      margin-bottom: 10px;
+  }
+
+  .add {
+      font-size: 40px;
+      cursor: pointer;
+  }
+
+  .form-control {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .danger {
+      color: red;
+      text-align: center;
+      padding: 20px;
+  }
+
+  .modal-title {
+      font-size: 40px;
+  }
+
+  .modal-body {
+      text-align: center;
+  }
+
+  .address {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 30px;
+  }
+
+  .controls {
+      margin-top: 20px;
+  }
+
+  .required:after {
+    content:" *";
+    color: red;
+  }

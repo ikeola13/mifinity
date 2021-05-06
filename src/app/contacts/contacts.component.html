@@ -1,0 +1,120 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Contact List</h5>
+        <h6>You have {{ contactList.length }} Contacts</h6>
+
+        <div>
+            <div *ngFor="let contact of contactList" class="contacts point" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" (click)="getAddress(contact.id)">
+                <span *ngIf="contact.avatar">
+                    <img [src]="contact.avatar" onerror="this.src='assets/images/person-circle.svg'" class="avatar">
+                </span>
+                <span *ngIf="!contact.avatar">
+                    <img src="assets/images/person-circle.svg" class="avatar">
+                </span>
+                {{ contact.first_name}} {{ contact.last_name }}
+            </div>
+        </div>
+
+        <form [formGroup]="addForm" class="controls">
+            <h4>New Contact</h4>
+            <div class="row">
+                <div class="col-9">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="last_name">
+                        <label class="required" for="floatingInput">Last Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="first_name">
+                        <label class="required"  for="floatingInput">First Name</label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <a (click)="addContact(addForm)">
+                        <i class="bi bi-plus-circle add"></i>
+                    </a>
+                </div>
+                <div *ngIf="submitted && !addForm.valid" class="danger">
+                    Please Fill All Fields!
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- Edit Contact Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-title">
+                    <span>
+                        <img [src]="modalAvatar" onerror="this.src='assets/images/person-circle.svg'" class="avatar">
+                    </span>
+                    {{ modalFirstName }} {{ modalLastName }}
+                </div>
+                <form [formGroup]="addressForm" class="address">
+                    <div formArrayName="parameter_points">
+                        <div *ngFor="let item of parameterPoints.controls; let pointIndex=index"
+                            [formGroupName]="pointIndex">
+                            <h5>Address #{{ pointIndex + 1 }}</h5>
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" name="street1"
+                                            formControlName="street1">
+                                        <label class="required"  for="floatingInput">Street 1</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput"
+                                            formControlName="street2">
+                                        <label class="required"  for="floatingInput">Street 2</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput"
+                                            formControlName="town">
+                                        <label class="required"  for="floatingInput">Town</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" formControlName="country">
+                                            <option *ngFor="let country of allCountries" [value]="country.iso2">
+                                                {{ country.name }}
+                                            </option>
+                                        </select>
+                                        <label class="required" for="floatingInput">Country</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <a (click)="removeAddress(item.value.id, pointIndex)">
+                                        <i class="bi bi-x add"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                    <div *ngIf="submittedAddress && !addressForm.valid" class="danger">
+                        Please Fill All Fields!
+                    </div>
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-7">
+                                <button (click)="addNewAddress()" type="button" class="btn btn-dark"><i
+                                        class="bi bi-plus"></i> Add Address</button>
+                            </div>
+                            <div class="col">
+                                <button (click)="saveAddress()" type="button" class="btn btn-dark"><i
+                                        class="bi bi-save"></i> Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i>
+                        Close Contact</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
